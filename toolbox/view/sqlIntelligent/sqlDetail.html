@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>运维工具箱</title>
+        <link rel="stylesheet" href="../../src/css/common/bootstrap.min.css">
+        <link rel="stylesheet" href="../../src/css/main.css">
+        <link rel="stylesheet" href="../../src/css/module/sqlIntelligent.css">
+        <link rel="shortcut icon" href="../../src/images/favicon.ico">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Worker ToolBox</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left mgl-50">
+                <li><a href="../txTool/index.html">工具箱</a></li>
+                <li><a href="../toolManage/toolBoxClient.html">工具管理</a></li>
+                <li class="active"><a href="#">SQL智能顾问</a></li>
+                <li><a href="monitorSqlDetail.html">SQL执行详情</a></li>
+            </ul>
+        </nav>
+        <div class="container-fluid container-fluid-tool">
+            <div class="container-header">
+                <button class="btn btn-info right back">返回</button>
+                <p class="title">SQL Monitoring Report</p>
+            </div>
+            <div class="container-main clear container-main-module">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>SQL Text</h4>
+                    </div>
+                </div>
+                <div class="row part-centent-row">
+                    <div class="col-lg-12 part-centent-col" id="J_sqlText">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Global Information</h4>
+                    </div>
+                </div>
+                <div class="row part-centent-row">
+                    <div class="col-lg-12 part-centent-col" id="J_InfoContent">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Gloal Stats</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered table-striped table-hover table-condensed mgb-0">
+                            <thead>
+                                <tr>
+                                    <th class="sort">Elapsed Time(s)</th>
+                                    <th class="sort">Cpu Time(s)</th>
+                                    <th class="sort">IO Waits(s)</th>
+                                    <th class="sort">Application Waits(s)</th>
+                                    <th class="sort">Concurrency Waits(s)</th>
+                                    <th class="sort">PL/SQL Time(s)</th>
+                                    <th class="sort">Other Waits(s)</th>
+                                    <th class="sort">Buffer Reqs</th>
+                                    <th class="sort">Read Reqs</th>
+                                    <th class="sort">Read Bytes</th>
+                                    <th class="sort">Writes Reqs</th>
+                                    <th class="sort">Writes Bytes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_listContent"></tbody>
+                        </table>
+                        <div class="listPager">
+                                <div class="left">
+                                    共<span id="pageCount"></span>页，每页显示
+                                    <select id="slipCount">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> 条
+                                </div>
+                                <div id="pager" class="right pager"></div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible fade in col-sm-4 col-sm-offset-4 hidden" role="alert" id="J_warnInfo">
+            <div class="alert-header">
+                <button type="button" class="close close-win">
+                    <span>&times;</span>
+                </button>
+                <h5>操作提示</h5>
+            </div>
+            <div class="alert-body">
+                <div id="J_warnContent">操作成功</div>
+            </div>
+        </div>
+
+        <!--信息模板-->
+        <script type="text/template" id="T_info_template">
+            <div class="row">
+                <% _.each(data, function(d){ %>
+                    <div class="col-lg-4">
+                        <label><%= d.name %>:</label><span><%= d.value %></span>
+                    </div>
+                <% }); %>
+            </div>
+        </script>
+
+        <!--列表模板-->
+        <script type="text/template" id="T_list_template">
+            <% _.each(data, function(d){ %>
+            <tr>
+                <td><%= d.db_name %></td>
+                <td><%= d.inst_name %></td>
+                <td><%= d.oracle_user %></td>
+                <td><%= d.oracle_port %></td>
+                <td><%= d.host %></td>
+                <td><%= d.os_port %></td>
+                <td><%= d.os_user %></td>
+                <td><%= d.os_directory %></td>
+                <td><%= d.host %></td>
+                <td><%= d.os_port %></td>
+                <td><%= d.os_user %></td>
+                <td><%= d.os_directory %></td>
+            </tr>
+            <% }); %>
+        </script>
+
+        <script src="../../src/js/common/jquery-1.11.3.js"></script>
+        <script src="../../src/js/common/bootstrap.min.js"></script>
+        <script src="../../src/js/common/jquery.pagination.min.js"></script>
+        <script src="../../src/js/common/jquery-ui-1.10.3.js"></script>
+        <script src="../../src/js/common/underscore-min.js"></script>
+        <script src="../../src/js/public/validate.js"></script>
+        <script src="../../src/js/sqlIntelligent/sqlDetail.js"></script>
+    </body>
+</html>

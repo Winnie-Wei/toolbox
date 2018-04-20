@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>运维工具箱</title>
+        <link rel="stylesheet" href="../../src/css/common/bootstrap.min.css">
+        <link rel="stylesheet" href="../../src/css/main.css">
+        <link rel="stylesheet" href="../../src/css/module/sqlIntelligent.css">
+        <link rel="shortcut icon" href="../../src/images/favicon.ico">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Worker ToolBox</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left mgl-50">
+                <li><a href="../txTool/index.html">工具箱</a></li>
+                <li><a href="../toolManage/toolBoxClient.html">工具管理</a></li>
+                <li><a href="sqlDetail.html">SQL智能顾问</a></li>
+                <li class="active"><a href="monitorSqlDetail.html">SQL执行详情</a></li>
+                <li><a href="sqlIntelligent.html">SQL智能顾问</a></li>
+            </ul>
+        </nav>
+        <div class="container-fluid container-fluid-tool">
+            <div class="container-header">
+                <button class="btn btn-info right back">返回</button>
+                <p class="title">受监视的SQL执行详细信息</p>
+            </div>
+            <div class="container-main clear container-main-module">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="mgt-10 pull-left">概况</h4>
+                        <div class="pull-right">
+                            <button class="btn btn-info">导出资料</button>
+                            <button class="btn btn-info">优化顾问</button>
+                            <button class="btn btn-info">查看报告</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row part-centent-row">
+                        <div class="panel panel-default panel-count">
+                            <div class="panel-heading" id="J_generalInfo">
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <h5>时间和等待统计信息</h5>
+                                    <div class="count-container" id="J_timeAndWaitCount">
+                                         <table>
+                                             <tr>
+                                                 <td class="progress-title">持续时间</td>
+                                                 <td class="progress-bar-td">
+                                                     <div class="progress">
+                                                          <div class="progress-bar progress-bar-info" style="width: 100%">
+                                                            <span class="sr-only">100% Complete (success)</span>
+                                                          </div>
+                                                     </div>
+                                                 </td>
+                                                 <td class="progress-count">1.0 m</td>
+                                             </tr>
+
+                                             <tr>
+                                                <td class="progress-title">数据库时间</td>
+                                                <td class="progress-bar-td">
+                                                     <div class="progress">
+                                                          <div class="progress-bar progress-bar-warning" style="width: 80%">
+                                                            <span class="sr-only">80% Complete (success)</span>
+                                                          </div>
+                                                          <div class="progress-bar progress-bar-info" style="width: 20%">
+                                                            <span class="sr-only">20% Complete (warning)</span>
+                                                          </div>
+                                                     </div>
+                                                 </td>
+                                                <td class="progress-count">1.0 m</td>
+                                             </tr>
+                                             <tr>
+                                                <td class="progress-title">PL/SQL和Java</td>
+                                                <td class="progress-bar-td">
+                                                     <div class="progress">
+                                                          <div class="progress-bar progress-bar-success" style="width: 20%">
+                                                            <span class="sr-only">20% Complete (success)</span>
+                                                          </div>
+                                                     </div>
+                                                 </td>
+                                                <td class="progress-count">1.0 m</td>
+                                             </tr>
+                                             <tr>
+                                                <td class="progress-title">等待活动百分比</td>
+                                                <td class="progress-bar-td">
+                                                     <div class="progress">
+                                                          <div class="progress-bar progress-bar-danger" style="width: 100%">
+                                                            <span class="sr-only">20% Complete (success)</span>
+                                                          </div>
+                                                     </div>
+                                                 </td>
+                                                <td class="progress-count">100</td>
+                                             </tr>
+                                         </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <h5>IO统计信息</h5>
+                                    <div class="count-container" id="J_ioCount">
+                                        <table>
+                                            <tr>
+                                                <td class="progress-title">缓冲区获取数</td>
+                                                <td class="progress-bar-td">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-info" style="width: 100%">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="progress-count">443K</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="progress-title">IO请求</td>
+                                                <td class="progress-bar-td">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-warning" style="width: 80%">
+                                                        </div>
+                                                        <div class="progress-bar progress-bar-info" style="width: 20%">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="progress-count">13K</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="progress-title">IO字节</td>
+                                                <td class="progress-bar-td">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" style="width: 20%">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="progress-count">163MB</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row row-table-only">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered table-striped table-hover table-condensed mgb-0">
+                            <thead>
+                                <tr>
+                                    <th  colspan="9">
+                                        <h5 class="pull-left">共有版本：3个</h5>
+                                        <form class="form-inline">
+                                            <div class="form-group right">
+                                                <label for="search">选择版本：</label>
+                                                <select class="form-control">
+                                                    <option>请选择</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="sort">ID</th>
+                                    <th class="sort">Operation</th>
+                                    <th class="sort">Name</th>
+                                    <th class="sort">E-Rows</th>
+                                    <th class="sort">E-Bytes</th>
+                                    <th class="sort">Cose(% CPU)</th>
+                                    <th class="sort">E-Time</th>
+                                    <th class="sort">Pstart</th>
+                                    <th class="sort">Pstop</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_listContent"></tbody>
+                        </table>
+                        <div class="listPager">
+                                <div class="left">
+                                    共<span id="pageCount"></span>页，每页显示
+                                    <select id="slipCount">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> 条
+                                </div>
+                                <div id="pager" class="right pager"></div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 count-chart" id="J_chart-count0"></div>
+                    <div class="col-lg-6 count-chart" id="J_chart-count1"></div>
+                    <div class="col-lg-6 count-chart" id="J_chart-count2"></div>
+                    <div class="col-lg-6 count-chart" id="J_chart-count3"></div>
+                    <div class="col-lg-6 count-chart" id="J_chart-count4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--信息模板-->
+        <script type="text/template" id="T_info_template">
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>SQL ID:</label><span><%= data.sql_id %></span>
+                </div>
+                <div class="col-lg-4">
+                    <label>已开始执行:</label><span><%= data.start_time %></span>
+                </div>
+                <div class="col-lg-4">
+                    <label>上次刷新时间:</label><span><%= data.fresh_time %></span>
+                </div>
+                <div class="col-lg-4">
+                    <label>用户:</label><span><%= data.user_name %></span>
+                </div>
+                <div class="col-lg-4">
+                    <label>执行ID:</label><span><%= data.execute_id %></span>
+                </div>
+                <div class="col-lg-4">
+                    <label>取数操作:</label><span><%= data.get_data_count %></span>
+                </div>
+            </div>
+        </script>
+
+        <!--列表模板-->
+        <script type="text/template" id="T_list_template">
+            <% _.each(data, function(d){ %>
+            <tr>
+                <td><%= d.db_name %></td>
+                <td><%= d.inst_name %></td>
+                <td><%= d.oracle_user %></td>
+                <td><%= d.oracle_port %></td>
+                <td><%= d.host %></td>
+                <td><%= d.os_port %></td>
+                <td><%= d.os_user %></td>
+                <td><%= d.os_port %></td>
+                <td><%= d.os_user %></td>
+            </tr>
+            <% }); %>
+        </script>
+
+
+
+        <script src="../../src/js/common/jquery-1.11.3.js"></script>
+        <script src="../../src/js/common/bootstrap.min.js"></script>
+        <script src="../../src/js/common/jquery.pagination.min.js"></script>
+        <script src="../../src/js/common/jquery-ui-1.10.3.js"></script>
+        <script src="../../src/js/common/echarts.js"></script>
+        <script src="../../src/js/common/underscore-min.js"></script>
+        <script src="../../src/js/public/validate.js"></script>
+        <script src="../../src/js/sqlIntelligent/monitorSqlDetail.js"></script>
+    </body>
+</html>

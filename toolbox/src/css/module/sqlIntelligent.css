@@ -1,0 +1,117 @@
+.container-main-module{
+    padding-left:18px; padding-right:18px;
+}
+
+.container-main-module h4{
+    margin-top: 16px;
+}
+
+.part-centent-row{
+    padding: 0px 15px;
+}
+
+.part-centent-col{
+    border:1px solid #ddd;
+    padding:10px;
+    background-color: #f9f9f9;
+}
+
+.part-centent-col label{
+    margin-top:2px;
+    margin-bottom:2px;
+}
+
+.count-container{
+    border:1px solid #ddd;
+    min-height:124px;
+    padding: 8px;
+}
+
+.count-container table{
+    width:94%;
+}
+
+.panel-count{
+    margin-bottom: 0px;
+}
+
+.panel-count .panel-body{
+    padding-left:0px;
+    padding-right: 0px;
+}
+
+.panel-count label{
+    width:30%;
+    text-align:right;
+    margin-bottom: 0px;
+}
+
+.row-table-only{
+    margin-top:20px;
+}
+
+.progress-title{text-align:right;width:20%;padding-right:20px;}
+
+.progress-bar-td{width:70%;}
+
+.table-progress .progress,.progress-bar-td .progress{
+    margin:5px 0;
+    height:16px;
+    border-radius:0px;
+    background-color:#fff;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+.table-progress .progress{
+    width:80%;
+    float: left;
+}
+
+.progress-bar{
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+
+.progress-count{text-align:right;padding-left:20px;}
+
+.count-chart{
+    height:186px;
+    padding:2px;
+    margin-bottom:15px;
+}
+
+.count-chart-inline{
+    height:292px;
+    padding:2px;
+    margin-bottom:15px;
+    top:-20px;
+}
+
+.btn-group-choose{
+    left: 38%;
+    top: 8px;
+    z-index:1000;
+}
+
+.btn-group-choose .btn{
+    padding-left:60px;
+    padding-right:60px;
+    border:1px solid #dbdbdb;
+    border-radius:0;
+    color:#999999;
+}
+
+.btn-group-choose .btn-primary{
+    background-color:#49b7d8;
+    border:1px solid #469fbf;
+    color:#fff;
+}
+
+.popover{
+    margin-left:80px;
+}
+
+.popover.top>.arrow {
+    left:22% !important;
+}

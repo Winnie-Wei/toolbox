@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运维工具箱</title>
+    <link rel="stylesheet" href="../../src/css/common/bootstrap.min.css">
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="shortcut icon" href="../../src/images/favicon.ico">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">Worker ToolBox</a>
+        </div>
+        <ul class="nav navbar-nav navbar-left mgl-50">
+            <li class="active"><a href="#">工具箱</a></li>
+            <li><a href="../toolManage/toolBoxClient.html">工具管理</a></li>
+            <li><a href="../sqlIntelligent/sqlDetail.html">SQL智能顾问</a></li>
+        </ul>
+    </nav>
+    <div class="container-fluid container-fluid-tool">
+        <div class="container-header">
+            <button class="btn btn-info right back">返回</button>
+            <p class="title">TX事物锁阻塞处理工具</p>
+        </div>
+        <div class="container-main clear">
+            <div>
+                <form class="form-inline">
+                    <div class="form-group right">
+                        <label for="search">搜索：</label>
+                        <input type="text" id="search" class="form-control" placeholder="请输入关键字">
+                    </div>
+                </form>
+                <button class="btn btn-info" id="createKill">生成kill命令</button>
+                <button class="btn btn-info" id="record">记录阻塞日志</button>
+            </div>
+            <table class="table table-bordered table-striped table-hover table-condensed mgt-10 mgb-0">
+                <thead>
+                    <tr>
+                        <th  colspan="11">
+                            <b class="left">某某列表</b>
+                            <div class="right">
+                                <a class="toggle toggleUp operateBtn">收拢</a>
+                                <a class="toggle toggleDown operateBtn hidden">展开</a>
+                                <a class="chooseAll operateBtn">全部选中</a>
+                                <a class="removeAll operateBtn">全部取消</a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th class="sort">全选</th>
+                        <th class="sort">单选</th>
+                        <th class="sort">SID</th>
+                        <th class="sort">用户名</th>
+                        <th class="sort">锁持有时间(秒)</th>
+                        <th class="sort">事务开始时间</th>
+                        <th class="sort">占用回滚块数</th>
+                        <th class="sort">Client_info</th>
+                        <th class="sort">阻塞会话数</th>
+                        <th class="sort">SQL_ID</th>
+                        <th class="sort">正在执行SQL语句</th>
+                    </tr>
+                </thead>
+                <tbody id="listContent"></tbody>
+            </table>
+            <div class="listPager">
+                <div class="left">
+                    共<span id="pageCount"></span>页，每页显示
+                    <select id="slipCount">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> 条
+                </div>
+                <div id="pager" class="right pager"></div>
+                <div id="pager2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-dismissible fade in col-sm-4 col-sm-offset-4 hidden" role="alert" id="killOrder">
+        <div class="alert-header">
+            <button type="button" class="close">
+                <span>&times;</span>
+            </button>
+            <h5>日志命令</h5>
+        </div>
+        <div class="alert-body">
+            <textarea id="alertContent" rows="10"></textarea>
+        </div>
+        <div class="alert-footer">
+            <button class="btn btn-info right" id="executeOrder">执行命令</button>
+            <a class="btn btn-info right" id="export" href="" download="">导出文本</a>
+        </div>
+    </div>
+    <div class="alert alert-dismissible fade in col-sm-4 col-sm-offset-4 hidden" role="alert" id="warnInfo">
+        <div class="alert-header">
+            <button type="button" class="close">
+                <span>&times;</span>
+            </button>
+            <h5>操作提示</h5>
+        </div>
+        <div class="alert-body">
+            <div id="warnContent">操作成功</div>
+        </div>
+    </div>
+    <script src="../../src/js/common/jquery-1.11.3.js"></script>
+    <script src="../../src/js/common/bootstrap.min.js"></script>
+    <script src="../../src/js/common/jquery.pagination.min.js"></script>
+    <script src="../../src/js/common/jquery-ui-1.10.3.js"></script>
+    <script src="../../src/js/txTool/main.js"></script>
+</body>
+</html>

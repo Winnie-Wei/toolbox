@@ -1,0 +1,14 @@
+{
+  "db_name": "Orcl",
+  "inst_name": "Orcl",
+  "oracle_user": "Lhb",
+  "oracle_password":"a",
+  "is_it_rac":"Y",
+  "inst_id": 1,
+  "oracle_port": 1521,
+  "host": "192.168.210.75",
+  "os_port": "22",
+  "os_user": "Oracl",
+  "os_password":"oracle",
+  "os_directory": "/tmp"
+}

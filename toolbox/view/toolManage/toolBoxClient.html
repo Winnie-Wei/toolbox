@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>运维工具箱</title>
+        <link rel="stylesheet" href="../../src/css/common/bootstrap.min.css">
+        <link rel="stylesheet" href="../../src/css/main.css">
+        <link rel="shortcut icon" href="../../src/images/favicon.ico">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Worker ToolBox</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left mgl-50">
+                <li><a href="../txTool/index.html">工具箱</a></li>
+                <li class="active"><a href="#">工具管理</a></li>
+                <li><a href="../sqlIntelligent/sqlDetail.html">SQL智能顾问</a></li>
+            </ul>
+        </nav>
+        <div class="container-fluid container-fluid-tool">
+            <div class="container-header">
+                <button class="btn btn-info right back">返回</button>
+                <p class="title">工具管理</p>
+            </div>
+            <div class="container-main clear">
+                <div>
+                    <form class="form-inline">
+                        <div class="form-group right">
+                            <label for="search">搜索：</label>
+                            <input type="text" id="search" class="form-control" placeholder="请输入关键字">
+                        </div>
+                    </form>
+                    <button class="btn btn-info J_config_add">新增</button>
+                </div>
+                <table class="table table-bordered table-striped table-hover table-condensed mgt-10 mgb-0">
+                    <thead>
+                        <tr>
+                            <th  colspan="10">
+                                <b class="left">工具管理列表</b>
+                                <div class="right">
+                                    <a class="chooseAll operateBtn">全部选中</a>
+                                    <a class="removeAll operateBtn">全部取消</a>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="J_selectAll"/></th>
+                            <th class="sort">数据库名</th>
+                            <th class="sort">数据库节点名称</th>
+                            <th class="sort">数据库用户</th>
+                            <th class="sort">数据库端口</th>
+                            <th class="sort">服务器主机IP地址</th>
+                            <th class="sort">服务器端口号</th>
+                            <th class="sort">服务器登录用户名</th>
+                            <th class="sort">服务器目录</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="J_listContent"></tbody>
+                </table>
+                <div class="listPager">
+                    <div class="left">
+                        共<span id="pageCount"></span>页，每页显示
+                        <select id="slipCount">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 条
+                    </div>
+                    <div id="pager" class="right pager"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible fade in col-sm-8 left-14per hidden" role="alert" id="J_configForm_popWin">
+            <div class="alert-header">
+                <button type="button" class="close close-win">
+                    <span>&times;</span>
+                </button>
+                <h5 id="J_configFormTitle">添加工具管理配置</h5>
+            </div>
+            <form class="form-horizontal" novalidate id="J_configForm">
+                <div class="alert-body" id="J_configFormDiv">
+
+                </div>
+                <div class="alert-footer">
+                    <a class="btn btn-info right close-win">取消</a>
+                    <a class="btn btn-info right" id="J_form_save">保存</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="alert alert-dismissible fade in col-sm-4 col-sm-offset-4 hidden" role="alert" id="J_confirmWin">
+            <div class="alert-header">
+                <button type="button" class="close close-win">
+                    <span>&times;</span>
+                </button>
+                <h5>确认提示</h5>
+            </div>
+            <div class="alert-body">
+                <div id="J_confirmContent"></div>
+            </div>
+            <div class="alert-footer text-center">
+                <a class="btn btn-info confirm-del">确定</a>
+                <a class="btn btn-info close-win">取消</a>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible fade in col-sm-4 col-sm-offset-4 hidden" role="alert" id="J_warnInfo">
+            <div class="alert-header">
+                <button type="button" class="close close-win">
+                    <span>&times;</span>
+                </button>
+                <h5>操作提示</h5>
+            </div>
+            <div class="alert-body">
+                <div id="J_warnContent">操作成功</div>
+            </div>
+        </div>
+
+        <!--列表模板-->
+        <script type="text/template" id="T_list_template">
+            <% _.each(data, function(d){ %>
+            <tr>
+                <td><input type="checkbox" class="select-one"></td>
+                <td><%= d.db_name %></td>
+                <td><%= d.inst_name %></td>
+                <td><%= d.oracle_user %></td>
+                <td><%= d.oracle_port %></td>
+                <td><%= d.host %></td>
+                <td><%= d.os_port %></td>
+                <td><%= d.os_user %></td>
+                <td><%= d.os_directory %></td>
+                <td>
+                    <a role="button" class="icon icon-edit J_config_edit" title="修改" data-host="<%= d.host %>" data-inst="<%= d.inst_name %>"></a>
+                    <a role="button" class="icon icon-del J_config_del" title="删除" data-host="<%= d.host %>" data-inst="<%= d.inst_name %>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </script>
+
+        <!--表单模板-->
+        <script type="text/template" id="T_form_template">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库名称<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text"  name="db_name" value="<%= data.db_name %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库节点名称<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="inst_name" value="<%= data.inst_name %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库登录用户<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="oracle_user" value="<%= data.oracle_user %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库登录密码<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="oracle_password" value="<%= data.oracle_password %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标服务器主机<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="host" value="<%= data.host %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库端口号<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="oracle_port" value="<%= data.oracle_port %>" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">目标数据库是否RAC<span class="sign-must">*</span></label>
+                            <%if (data.is_it_rac == 'Y') { %>
+                                <div class="col-lg-6 text-left radioGroupDiv">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_it_rac" value="Y" checked="checked"> 是
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_it_rac" value="N"> 否
+                                    </label>
+                                </div>
+                            <% } %>
+                            <%if (!data.is_it_rac || data.is_it_rac == 'N') { %>
+                                <div class="col-lg-6 text-left">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_it_rac" value="Y"> 是
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="is_it_rac" value="N" checked="checked"> 否
+                                    </label>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标数据库节点ID<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="inst_id" value="<%= data.inst_id %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标服务器端口号<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="os_port" value="<%= data.os_port %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标服务器登录用户<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="os_user" value="<%= data.os_user %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标服务器登录密码<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="os_password" value="<%= data.os_password %>" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group clear-mrgb">
+                            <label class="control-label col-lg-4">目标服务器目录<span class="sign-must">*</span></label>
+                            <div class="col-lg-7">
+                                <input class="form-control" type="text" name="os_directory" value="<%= data.os_directory %>" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row red" style="height:20px;">
+                    <div class="col-lg-12" id="J_form_errorMsg">
+                    </div>
+                </div>
+        </script>
+
+        <script src="../../src/js/common/jquery-1.11.3.js"></script>
+        <script src="../../src/js/common/bootstrap.min.js"></script>
+        <script src="../../src/js/common/jquery.pagination.min.js"></script>
+        <script src="../../src/js/common/jquery-ui-1.10.3.js"></script>
+        <script src="../../src/js/common/underscore-min.js"></script>
+        <script src="../../src/js/public/validate.js"></script>
+        <script src="../../src/js/toolManage/toolManage.js"></script>
+    </body>
+</html>
